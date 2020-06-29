@@ -17,7 +17,9 @@ Upgrade from upstream:
 
 ```
 git checkout master
-git fetch upstream
 git pull upstream master
 git push origin master
+git checkout jo-m
+git merge master
+git push origin jo-m
 ```
