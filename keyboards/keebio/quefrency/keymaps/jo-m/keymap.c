@@ -2,6 +2,13 @@
 
 extern keymap_config_t keymap_config;
 
+// Rotary encoder ideas:
+// Zoom
+// Arrows
+// Sound
+// Undo/Redo
+// Application Mode Switch
+
 // base settings
 void keyboard_post_init_user(void) {
   debug_enable=false;
@@ -52,6 +59,7 @@ enum custom_macro_keycodes {
     GIT_PUSH,
     GIT_PULL,
     CD_DOWN,
+    CD_BACK,
     LS_LA,
 };
 
@@ -76,6 +84,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case CD_DOWN:
         SEND_STRING("cd ..\n");
         break;
+    case CD_BACK:
+        SEND_STRING("cd -\n");
+        break;
     case LS_LA:
         SEND_STRING("ls -lah\n");
         break;
@@ -95,9 +106,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_FN1] = LAYOUT_65_with_macro(
     _______,  _______,   _______,  KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   _______,  KC_DEL,  _______,  \
-    _______,  _______,   _______,  _______,  _______,   X(EXCL),  X(LOL),   X(THUU),  _______,  XP(ue,UE),_______,  XP(oe,OE),_______,  _______, KC_GRAVE,  _______,  _______,  \
+    _______,  _______,   _______,  _______,  _______,  X(EXCL),  X(LOL),   X(THUU),  _______,  XP(ue,UE),_______,  XP(oe,OE),_______,  _______, KC_GRAVE,  _______,  _______,  \
     _______,  _______,   _______,  XP(ae,AE),X(SCRM),  _______,  X(FIST),  _______,  KC_LEFT,  KC_DOWN,  KC_UP,    KC_RGHT,  _______,  _______,  _______,  _______,  \
-    _______,  _______,   _______,  X(MAHN),  _______,  X(CRY),   _______,  X(BOX),   _______,  X(HMMM),  _______,  _______,  _______,  _______,  KC_PGUP,  _______,  \
+    CD_BACK,  _______,   _______,  X(MAHN),  _______,  X(CRY),   _______,  X(BOX),   _______,  X(HMMM),  _______,  _______,  _______,  _______,  KC_PGUP,  _______,  \
     CD_DOWN,  LS_LA,     _______,  _______,  _______,  _______,  _______,            _______,  _______,  _______,  _______,  _______,  KC_HOME,  KC_RGHT,  KC_END
   )
 };
