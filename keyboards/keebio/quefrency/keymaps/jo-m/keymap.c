@@ -49,9 +49,8 @@ enum custom_macro_keycodes {
     GIT_COM_M,
     GIT_PUSH,
     GIT_PULL,
-    CD_DOWN,
-    CD_BACK,
-    LS_LA,
+    TMX_ZOOM,
+    TMX_CRTE,
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -72,6 +71,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case GIT_PULL:
         SEND_STRING("git pull");
         break;
+    case TMX_ZOOM:
+        SEND_STRING(SS_LCTL("b"));
+        SEND_STRING("z");
+        break;
+    case TMX_CRTE:
+        SEND_STRING(SS_LCTL("b"));
+        SEND_STRING("c");
+        break;
     }
     return true;
 };
@@ -90,7 +97,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______,  _______,   _______,  KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   _______,  KC_DEL,  _______,  \
     _______,  _______,   _______,  _______,  _______,  _______,  _______,  _______,  _______,  XP(ue,UE),_______,  XP(oe,OE),_______,  _______, KC_GRAVE,  _______,  _______,  \
     _______,  _______,   _______,  XP(ae,AE),_______,  _______,  _______,  _______,  KC_LEFT,  KC_DOWN,  KC_UP,    KC_RGHT,  _______,  _______,  _______,  _______,  \
-    _______,  _______,   _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  KC_PGUP,  _______,  \
+    _______,  _______,   _______,  TMX_ZOOM, _______,  TMX_CRTE, _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  KC_PGUP,  _______,  \
     _______,  _______,   _______,  _______,  _______,  _______,  _______,            _______,  _______,  _______,  _______,  _______,  KC_HOME,  KC_PGDN,  KC_END
   )
 };
