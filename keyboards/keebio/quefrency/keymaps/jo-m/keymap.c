@@ -2,13 +2,6 @@
 
 extern keymap_config_t keymap_config;
 
-// Rotary encoder ideas:
-// Zoom
-// Arrows
-// Sound
-// Undo/Redo
-// Application Mode Switch
-
 // base settings
 void keyboard_post_init_user(void) {
   debug_enable=false;
