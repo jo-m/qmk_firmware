@@ -14,6 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include QMK_KEYBOARD_H
+#include "virtser.h"
 
 // layer names
 #define _BASE 0
@@ -28,7 +29,7 @@ enum encoder_names {
 enum custom_macro_keycodes {
     RGB_OFF = SAFE_RANGE,
     RGB_STA,
-    RGB_BR_2,
+    RGB_BR_1,
     RGB_RB_2,
     RGB_KN_1,
     RGB_TW_4,
@@ -36,7 +37,41 @@ enum custom_macro_keycodes {
     ZOOM_0,
 };
 
-// RGB Macros
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+    /*
+        Base Layer
+        +--------+--------+-------+
+        | Zoom 0 | Layer  |       |
+        +--------+--------+-------+
+        | Fn7    | Fn8    | Fn9   |
+        +--------+--------+-------+
+        | Fn10   | Fn11   | Fn12  |
+        +--------+--------+-------+
+     */
+    [_BASE] = LAYOUT(
+        ZOOM_0, MO(_RGB), _______,
+        KC_F7,  KC_F8,    KC_F9,
+        KC_F10, KC_F11,   KC_F12
+    ),
+
+    /*
+        RBG Settings
+        +---------+---------+-----------+
+        | RGB Mod | Layer   | RGB R Mod |
+        +---------+---------+-----------+
+        | Off     | Static  | Breathing |
+        +---------+---------+-----------+
+        | Knight  | Rainbow | Twinkle   |
+        +---------+---------+-----------+
+     */
+    [_RGB] = LAYOUT(
+        RGB_RMOD, _______,  RGB_MOD,
+        RGB_OFF,  RGB_STA,  RGB_BR_1,
+        RGB_KN_1, RGB_RB_2, RGB_TW_4
+    ),
+};
+
+// Macros
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!record->event.pressed) {
         return true;
@@ -49,9 +84,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         rgblight_enable();
         rgblight_mode(RGBLIGHT_MODE_STATIC_LIGHT);
         break;
-    case RGB_BR_2:
+    case RGB_BR_1:
         rgblight_enable();
-        rgblight_mode(RGBLIGHT_MODE_BREATHING + 2);
+        rgblight_mode(RGBLIGHT_MODE_BREATHING + 1);
         break;
     case RGB_RB_2:
         rgblight_enable();
@@ -73,41 +108,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
 };
 
-const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    /*
-        Base Layer
-        +--------+--------+-------+
-        | Zoom 0 | Mode   | Reset |
-        +--------+--------+-------+
-        | Fn7    | Fn8    | Fn9   |
-        +--------+--------+-------+
-        | Fn10   | Fn11   | Fn12  |
-        +--------+--------+-------+
-     */
-    [_BASE] = LAYOUT(
-        ZOOM_0, MO(_RGB), RESET,
-        KC_F7,  KC_F8,    KC_F9,
-        KC_F10, KC_F11,   KC_F12
-    ),
-
-    /*
-        RBG Settings
-        +---------+---------+-----------+
-        | RGB Mod | Mode    | RGB R Mod |
-        +---------+---------+-----------+
-        | Off     | Static  | Breathing |
-        +---------+---------+-----------+
-        | Knight  | Rainbow | Twinkle   |
-        +---------+---------+-----------+
-     */
-    [_RGB] = LAYOUT(
-        RGB_RMOD, _______,  RGB_MOD,
-        RGB_OFF,  RGB_STA,  RGB_BR_2,
-        RGB_KN_1, RGB_RB_2, RGB_TW_4
-    ),
-};
-
+// Encoder input
 void encoder_update_user(uint8_t index, bool clockwise) {
+    // Base layer
     if (layer_state_is(_BASE)) {
         if (index == _LEFT) {
             // Zoom
@@ -125,6 +128,7 @@ void encoder_update_user(uint8_t index, bool clockwise) {
                 SEND_STRING(SS_LCTL("z"));
             }
         }
+    // RGB layer
     } else if(layer_state_is(_RGB)) {
         if (index == _LEFT) {
             if (clockwise) {
@@ -142,5 +146,78 @@ void encoder_update_user(uint8_t index, bool clockwise) {
                 rgblight_decrease_sat();
             }
         }
+    }
+}
+
+#define MAGIC_1 'A'
+#define MAGIC_2 'B'
+#define MAGIC_3 'C'
+
+typedef struct {
+    uint8_t magic_1;
+    uint8_t magic_2;
+
+    uint8_t enable;
+    uint8_t mode;
+    uint8_t hue;
+    uint8_t sat;
+    uint8_t val;
+
+    uint8_t magic_3;
+} serial_msg_t;
+
+void package_received(const serial_msg_t *msg) {
+    rgblight_mode_noeeprom(msg->mode);
+    rgblight_sethsv_noeeprom(msg->hue, msg->sat, msg->val);
+
+    if (msg->enable == 1) {
+        rgblight_enable_noeeprom();
+    } else {
+        rgblight_disable_noeeprom();
+    }
+}
+
+// Receive a byte via serial.
+void virtser_recv(const uint8_t recv) {
+    static serial_msg_t msg;
+    static uint8_t n_received = 0;
+
+    if (n_received == offsetof(serial_msg_t, magic_1)) {
+        if (recv == MAGIC_1) {
+            msg.magic_1 = MAGIC_1;
+            n_received++;
+            return;
+        } else {
+            n_received = 0;
+            return;
+        }
+    }
+
+    if (n_received == offsetof(serial_msg_t, magic_2)) {
+        if (recv == MAGIC_2) {
+            msg.magic_2 = MAGIC_2;
+            n_received++;
+            return;
+        } else {
+            n_received = 0;
+            return;
+        }
+    }
+
+    if (n_received == offsetof(serial_msg_t, magic_3)) {
+        if (recv == MAGIC_3) {
+            msg.magic_2 = MAGIC_3;
+            n_received++;
+            package_received(&msg);
+        }
+        n_received = 0;
+        return;
+    }
+
+    if(n_received > offsetof(serial_msg_t, magic_2)) {
+        uint8_t *p = &msg.magic_1;
+        p += n_received;
+        *p = recv;
+        n_received++;
     }
 }
