@@ -9,8 +9,7 @@ Deploy:
 ```bash
 cd repo_root_folder
 
-qmk compile -kb keebio/sinc/rev1 -km jo-m && \
-    make keebio/sinc/rev1:jo-m:dfu
+make keebio/sinc/rev1:jo-m:flash
 ```
 
 Upgrade from upstream:
