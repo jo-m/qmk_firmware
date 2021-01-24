@@ -1,7 +1,5 @@
 #include QMK_KEYBOARD_H
 
-extern keymap_config_t keymap_config;
-
 // base settings
 void keyboard_post_init_user(void) {
   debug_enable=false;
