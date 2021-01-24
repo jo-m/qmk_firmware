@@ -1,13 +1,5 @@
 #include QMK_KEYBOARD_H
 
-// base settings
-void keyboard_post_init_user(void) {
-  debug_enable=false;
-  debug_matrix=false;
-  debug_keyboard=false;
-  debug_mouse=false;
-}
-
 #include "unicode.c"
 #include "macros.c"
 
