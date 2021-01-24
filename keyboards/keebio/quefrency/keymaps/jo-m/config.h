@@ -4,7 +4,7 @@
 #undef RGBLED_SPLIT
 
 //
-// save some space
+// Save some space
 //
 
 #define NO_ACTION_ONESHOT

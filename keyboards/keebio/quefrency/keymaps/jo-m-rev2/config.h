@@ -1,4 +1,42 @@
 #pragma once
 
 #define USE_SERIAL
-#undef LOCKING_SUPPORT_ENABLE
+
+//
+// Backlight
+//
+
+#define BACKLIGHT_LEVELS 5
+#define BACKLIGHT_BREATHING
+#define BREATHING_PERIOD 10 // seconds
+
+//
+// RGB
+//
+
+#ifdef RGB_MATRIX_ENABLE
+#    define RGB_MATRIX_KEYPRESSES
+#endif
+
+// remove default animations
+#undef RGBLIGHT_ANIMATIONS
+
+// enable some
+#define RGBLIGHT_EFFECT_BREATHING
+#define RGBLIGHT_EFFECT_RAINBOW_MOOD
+#define RGBLIGHT_EFFECT_RAINBOW_SWIRL
+#define RGBLIGHT_EFFECT_SNAKE
+#define RGBLIGHT_EFFECT_KNIGHT
+// #define RGBLIGHT_EFFECT_CHRISTMAS
+#define RGBLIGHT_EFFECT_STATIC_GRADIENT
+// #define RGBLIGHT_EFFECT_RGB_TEST
+#define RGBLIGHT_EFFECT_ALTERNATING
+#define RGBLIGHT_EFFECT_TWINKLE
+
+//
+// Save some space
+//
+
+#define NO_ACTION_ONESHOT
+#define NO_ACTION_MACRO
+#define NO_ACTION_FUNCTION
