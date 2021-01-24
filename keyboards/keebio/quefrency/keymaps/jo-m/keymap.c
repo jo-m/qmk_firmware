@@ -9,72 +9,13 @@ void keyboard_post_init_user(void) {
   debug_keyboard=false;
   debug_mouse=false;
 }
-void matrix_init_user(void) {
-    set_unicode_input_mode(UC_LNX);
-};
+
+#include "unicode.c"
+#include "macros.c"
 
 // layer names
 #define _BASE 0
 #define _FN1  1
-
-// unicode
-enum unicode_names {
-    // umlauts
-    ae, AE, oe, OE, ue, UE,
-    // emojis
-    THUU, EXCL, FIST, MAHN, LOL,
-    SCRM, HMMM, CRY, BOX
-};
-
-const uint32_t PROGMEM unicode_map[] = {
-    [ae]    =  0x00E4,  // ä
-    [AE]    =  0x00C4,  // Ä
-    [oe]    =  0x00F6,  // ö
-    [OE]    =  0x00D6,  // Ö
-    [ue]    =  0x00FC,  // ü
-    [UE]    =  0x00DC,  // Ü
-};
-
-
-// macros
-enum custom_macro_keycodes {
-    GIT_ADD_P = SAFE_RANGE,
-    GIT_COM_M,
-    GIT_PUSH,
-    GIT_PULL,
-    TMX_ZOOM,
-    TMX_CRTE,
-};
-
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if (!record->event.pressed) {
-        return true;
-    }
-    switch (keycode) {
-    case GIT_ADD_P:
-        SEND_STRING("git add -p");
-        break;
-    case GIT_COM_M:
-        SEND_STRING("git commit -m ''");
-        tap_code(KC_LEFT);
-        break;
-    case GIT_PUSH:
-        SEND_STRING("git push");
-        break;
-    case GIT_PULL:
-        SEND_STRING("git pull");
-        break;
-    case TMX_ZOOM:
-        SEND_STRING(SS_LCTL("b"));
-        SEND_STRING("z");
-        break;
-    case TMX_CRTE:
-        SEND_STRING(SS_LCTL("b"));
-        SEND_STRING("c");
-        break;
-    }
-    return true;
-};
 
 // keymaps
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {

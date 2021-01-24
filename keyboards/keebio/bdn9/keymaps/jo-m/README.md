@@ -1,8 +1,7 @@
 Was set up with
 
 ```bash
-qmk config user.keymap=jo-m
-qmk new-keymap -kb keebio/bdn9/rev1
+qmk new-keymap -kb keebio/bdn9/rev1 -km jo-m
 ```
 
 Deploy:

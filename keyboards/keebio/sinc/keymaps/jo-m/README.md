@@ -1,15 +1,13 @@
 Was set up with
 
 ```bash
-qmk config user.keymap=jo-m
-qmk new-keymap -kb keebio/sinc/rev1
+qmk new-keymap -kb keebio/sinc/rev1 -km jo-m
 ```
 
 Deploy:
 
 ```bash
 cd repo_root_folder
-
 make keebio/sinc/rev1:jo-m:flash
 ```
 
