@@ -10,8 +10,8 @@ Deploy:
 
 ```bash
 cd repo_root_folder
-qmk compile -kb keebio/quefrency/rev1 -km jo-m && \
-    make keebio/quefrency/rev1:jo-m:avrdude
+
+make keebio/quefrency/rev1:jo-m:flash
 ```
 
 Upgrade from upstream:
