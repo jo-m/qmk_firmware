@@ -1,8 +1,21 @@
 #include QMK_KEYBOARD_H
 
-#define _BASE 0
-#define _FN1 1
+// base settings
+void keyboard_post_init_user(void) {
+  debug_enable=false;
+  debug_matrix=false;
+  debug_keyboard=false;
+  debug_mouse=false;
+}
 
+#include "unicode.c"
+#include "macros.c"
+
+// layer names
+#define _BASE 0
+#define _FN1  1
+
+// keymaps
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT(
     KC_GESC, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_DEL,  KC_BSPC, \
