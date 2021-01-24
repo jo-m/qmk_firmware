@@ -57,7 +57,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT(
         KC_MUTE,  MO(_RGB),   _______,
         KC_MPRV,  KC_MPLY,    KC_MNXT,
-        KC_MMUTE, KC_MPTT, BL_STEP
+        KC_MMUTE, KC_MPTT,    BL_STEP
     ),
 
     /*
@@ -83,7 +83,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // Mic push to talk
     if (keycode == KC_MPTT) {
-        tap_code(KC_F20);
+        tap_code(KC_MMUTE);
         return true;
     }
 

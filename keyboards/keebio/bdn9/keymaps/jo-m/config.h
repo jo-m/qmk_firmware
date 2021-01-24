@@ -4,6 +4,19 @@
 #    define RGB_MATRIX_KEYPRESSES
 #endif
 
+//
+// Backlight
+//
+
+#undef  BACKLIGHT_LEVELS
+#define BACKLIGHT_LEVELS 5
+#define BACKLIGHT_BREATHING
+#define BREATHING_PERIOD 10 // seconds
+
+//
+// RGB
+//
+
 // remove default animations
 #undef RGBLIGHT_ANIMATIONS
 
@@ -20,7 +33,7 @@
 #define RGBLIGHT_EFFECT_TWINKLE
 
 //
-// save some space
+// Save some space
 //
 
 #define NO_ACTION_ONESHOT
