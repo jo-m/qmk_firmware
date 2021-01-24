@@ -1,3 +1,4 @@
 keyboards/keebio/bdn9/keymaps/jo-m/
 keyboards/keebio/quefrency/keymaps/jo-m/
+keyboards/keebio/quefrency/keymaps/jo-m-rev2/
 keyboards/keebio/sinc/keymaps/jo-m

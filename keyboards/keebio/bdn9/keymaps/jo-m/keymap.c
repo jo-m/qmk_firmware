@@ -27,7 +27,8 @@ enum encoder_names {
 };
 
 enum custom_macro_keycodes {
-    KC_MIC_PTT = SAFE_RANGE,
+    // mic push to talk
+    KC_MPTT = SAFE_RANGE,
 
     KC_RGB_OFF,
     KC_RGB_STA,
@@ -36,6 +37,9 @@ enum custom_macro_keycodes {
     KC_RGB_KN_1,
     KC_RGB_TW_4,
 };
+
+// KC_F20 is AudioMicMute (https://github.com/linuxmint/gtk/blob/master/gdk/keynames.txt)
+#define KC_MMUTE KC_F20
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /*
@@ -53,23 +57,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT(
         KC_MUTE,  MO(_RGB),   _______,
         KC_MPRV,  KC_MPLY,    KC_MNXT,
-        KC_F20,   KC_MIC_PTT, BL_STEP
+        KC_MMUTE, KC_MPTT, BL_STEP
     ),
 
     /*
         RBG Settings
-        +---------+---------+-----------+
-        | < -Hue  |         | < -Sat    |
-        | RGB Mod |         | RGB R Mod |
-        | > +Hue  |         | > +Sat    |
-        +---------+---------+-----------+
-        | Off     | Static  | Breathing |
-        +---------+---------+-----------+
-        | Knight  | Rainbow | Twinkle   |
-        +---------+---------+-----------+
+        +-----------+---------+-----------+
+        | < -Hue    |         | < -Sat    |
+        | RGB R Mod |         | RGB Mod   |
+        | > +Hue    |         | > +Sat    |
+        +-----------+---------+-----------+
+        | Off       | Static  | Breathing |
+        +-----------+---------+-----------+
+        | Knight    | Rainbow | Twinkle   |
+        +-----------+---------+-----------+
      */
     [_RGB] = LAYOUT(
-        RGB_RMOD, _______,     RGB_MOD,
+        RGB_RMOD,    _______,     RGB_MOD,
         KC_RGB_OFF,  KC_RGB_STA,  KC_RGB_BR_1,
         KC_RGB_KN_1, KC_RGB_RB_2, KC_RGB_TW_4
     ),
@@ -78,7 +82,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Macros
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // Mic push to talk
-    if (keycode == KC_MIC_PTT) {
+    if (keycode == KC_MPTT) {
         tap_code(KC_F20);
         return true;
     }
