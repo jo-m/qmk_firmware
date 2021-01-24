@@ -1,17 +1,15 @@
 Was set up with
 
 ```bash
-qmk config user.keyboard=keebio/bdn9/rev1
 qmk config user.keymap=jo-m
-qmk new-keymap
+qmk new-keymap -kb keebio/bdn9/rev1
 ```
 
 Deploy:
 
 ```bash
 cd repo_root_folder
-qmk compile -kb keebio/bdn9 -km jo-m && \
-    make keebio/bdn9:jo-m:avrdude
+make keebio/bdn9/rev1:jo-m:flash
 ```
 
 Upgrade from upstream:

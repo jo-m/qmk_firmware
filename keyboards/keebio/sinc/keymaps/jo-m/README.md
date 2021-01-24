@@ -1,6 +1,7 @@
 Was set up with
 
 ```bash
+qmk config user.keymap=jo-m
 qmk new-keymap -kb keebio/sinc/rev1
 ```
 

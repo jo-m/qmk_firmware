@@ -1,9 +1,8 @@
 Was set up with
 
 ```bash
-qmk config user.keyboard=keebio/quefrency/rev1
 qmk config user.keymap=jo-m
-qmk new-keymap
+qmk new-keymap -kb keebio/sinc/rev1
 ```
 
 Deploy:
