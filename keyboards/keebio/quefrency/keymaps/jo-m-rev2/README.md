@@ -1,7 +1,7 @@
 Was set up with
 
 ```bash
-qmk new-keymap -kb keebio/quefrency/rev1 -km jo-m-rev1
+qmk new-keymap -kb keebio/quefrency/rev2 -km jo-m-rev2
 ```
 
 Deploy:
@@ -15,10 +15,10 @@ make git-submodule
 
 # build
 qmk clean -a
-qmk compile -kb keebio/quefrency/rev1 -km jo-m-rev1
+qmk compile -kb keebio/quefrency/rev2 -km jo-m-rev2
 
 # flash
-qmk flash -kb keebio/quefrency/rev1 -km jo-m-rev1
+qmk flash -kb keebio/quefrency/rev2 -km jo-m-rev2
 ```
 
 Upgrade from upstream:
