@@ -36,17 +36,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 enum encoder_names {
-  _LEFT,
-  _RIGHT,
+  _LEFT = 0,
+  _RIGHT = 1,
 };
 
-bool encoder_update_user(uint8_t index, bool clockwise) {
+bool encoder_update_user(const uint8_t index, const bool clockwise) {
   // left encoder
   if (index == _LEFT) {
+    // seems to be the other way around
     if (clockwise) {
-        tap_code(KC_VOLD);
-    } else {
         tap_code(KC_VOLU);
+    } else {
+        tap_code(KC_VOLD);
     }
   }
   // right encoder

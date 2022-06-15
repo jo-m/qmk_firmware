@@ -40,7 +40,7 @@ enum encoder_names {
   _RIGHT,
 };
 
-bool encoder_update_user(uint8_t index, bool clockwise) {
+bool encoder_update_user(const uint8_t index, const bool clockwise) {
   // left encoder
   if (index == _LEFT) {
     if (clockwise) {
