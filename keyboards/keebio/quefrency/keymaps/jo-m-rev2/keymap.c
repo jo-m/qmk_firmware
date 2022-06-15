@@ -27,7 +27,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_LED] = LAYOUT_65_with_macro(
-    _______,  _______,   RGB_M_P,  RGB_M_B,  RGB_M_R,  RGB_M_SW, RGB_M_SN, RGB_M_K,  RGB_M_G,  _______,  _______,  _______,  _______,  _______, _______,   _______,  _______,  _______,  \
+    _______,  _______,   RGB_MODE_BREATHE,  RGB_MODE_RAINBOW,  RGB_MODE_SWIRL,  RGB_MODE_SNAKE, RGB_MODE_KNIGHT, RGB_MODE_GRADIENT,  RGB_MODE_TWINKLE,  _______,  _______,  _______,  _______,  _______, _______,   _______,  _______,  _______,  \
     RGB_HUD,  RGB_HUI,   RGB_TOG,  RGB_RMOD, RGB_MOD, _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  \
     RGB_SAD,  RGB_SAI,   _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  \
     RGB_VAD,  RGB_VAI,   _______,  _______,  _______,  _______,  RESET,    EEP_RST,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  \
