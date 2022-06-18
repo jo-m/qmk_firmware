@@ -119,7 +119,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 };
 
 // Encoder input
-void encoder_update_user(uint8_t index, bool clockwise) {
+bool encoder_update_user(uint8_t index, bool clockwise) {
     // Base layer
     if (layer_state_is(_BASE)) {
         if (index == _LEFT) {
@@ -156,6 +156,8 @@ void encoder_update_user(uint8_t index, bool clockwise) {
             }
         }
     }
+
+    return false;
 }
 
 #include "rgblib.c"
