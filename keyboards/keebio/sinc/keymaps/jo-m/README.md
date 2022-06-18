@@ -7,8 +7,18 @@ qmk new-keymap -kb keebio/sinc/rev1 -km jo-m
 Deploy:
 
 ```bash
-cd repo_root_folder
-make keebio/sinc/rev1:jo-m:flash
+cd qmk_firmware
+
+# prepare
+make setup
+make git-submodule
+
+# build
+qmk clean -a
+qmk compile -kb keebio/sinc/rev1 -km jo-m
+
+# flash
+qmk flash -kb keebio/sinc/rev1 -km jo-m
 ```
 
 Upgrade from upstream:
