@@ -34,3 +34,34 @@ QMK is developed and maintained by Jack Humbert of OLKB with contributions from 
 ## Official Website
 
 [qmk.fm](https://qmk.fm) is the official website of QMK, where you can find links to this page, the documentation, and the keyboards supported by QMK.
+
+## jo-m branch
+
+https://docs.qmk.fm/newbs_getting_started
+
+```bash
+python3 -m pip install --user qmk
+
+git clone ...
+cd qmk_firmware
+qmk setup
+```
+
+# Keymaps
+
+[bdn9](keyboards/keebio/bdn9/keymaps/jo_m/README.md)
+[quefrency-r1](keyboards/keebio/quefrency/keymaps/jo_m_rev1/README.md)
+[quefrency-r2](keyboards/keebio/quefrency/keymaps/jo_m_rev2/README.md)
+[quefrency-r3](keyboards/keebio/quefrency/keymaps/jo_m_rev3/README.md)
+[sinc](keyboards/keebio/sinc/keymaps/jo_m/README.md)
+
+# Synching fork
+
+```bash
+git checkout master
+git pull upstream master
+git push origin master
+git checkout jo-m
+git merge master
+git push origin jo-m
+```
