@@ -1,35 +1,8 @@
 #pragma once
 
-//
-// Backlight
-//
-
-#define BACKLIGHT_LEVELS 3
-#define BACKLIGHT_BREATHING
-#define BREATHING_PERIOD 6
-#define BACKLIGHT_DEFAULT_LEVEL 0
-
-//
-// RGB
-//
-
-#ifdef RGB_MATRIX_ENABLE
-#    define RGB_MATRIX_KEYPRESSES
-#endif
-
-// remove default animations
-#undef RGBLIGHT_ANIMATIONS
-
-// enable some
-#define RGBLIGHT_EFFECT_BREATHING
-#define RGBLIGHT_EFFECT_RAINBOW_MOOD
-#define RGBLIGHT_EFFECT_RAINBOW_SWIRL
-#define RGBLIGHT_EFFECT_SNAKE
-#define RGBLIGHT_EFFECT_KNIGHT
-#define RGBLIGHT_EFFECT_STATIC_GRADIENT
-#define RGBLIGHT_EFFECT_TWINKLE
-
-//
 // Unicode
-//
 #define UNICODE_SELECTED_MODES UNICODE_MODE_LINUX
+
+// RGB lighting will be switched off when the host goes to sleep
+#define RGBLIGHT_SLEEP
+#define RGBLIGHT_SPLIT
