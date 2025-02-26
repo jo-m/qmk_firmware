@@ -47,6 +47,15 @@ cd qmk_firmware
 qmk setup
 ```
 
+# NixOS
+
+To be able to flash, set [`hardware.keyboard.qmk.enable = true`](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/hardware/keyboard/qmk.nix).
+Then:
+
+```bash
+nix-shell -p qmk
+```
+
 # Keymaps
 
 - [bdn9](keyboards/keebio/bdn9/keymaps/jo_m/README.md)
