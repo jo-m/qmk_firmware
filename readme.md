@@ -50,9 +50,9 @@ qmk setup
 # Keymaps
 
 - [bdn9](keyboards/keebio/bdn9/keymaps/jo_m/README.md)
-- [quefrency-r1](keyboards/keebio/quefrency/keymaps/jo_m_rev1/README.md)
-- [quefrency-r2](keyboards/keebio/quefrency/keymaps/jo_m_rev2/README.md)
-- [quefrency-r3](keyboards/keebio/quefrency/keymaps/jo_m_rev3/README.md)
+- [quefrency-r1](keyboards/keebio/quefrency/keymaps/jo_m_rev1/README.md) (Home, primary)
+- [quefrency-r2](keyboards/keebio/quefrency/keymaps/jo_m_rev2/README.md) (Home, spare)
+- [quefrency-r3](keyboards/keebio/quefrency/keymaps/jo_m_rev3/README.md) (Office)
 - [sinc](keyboards/keebio/sinc/keymaps/jo_m/README.md)
 
 # Synching fork
