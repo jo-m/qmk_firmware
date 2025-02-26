@@ -52,9 +52,9 @@ bool encoder_update_user(const uint8_t index, const bool clockwise) {
   // right encoder
   else if (index == _RIGHT) {
     if (clockwise) {
-        tap_code(KC_WH_D);
+        tap_code(MS_WHLD);
     } else {
-        tap_code(KC_WH_U);
+        tap_code(MS_WHLU);
     }
   }
   return false;
